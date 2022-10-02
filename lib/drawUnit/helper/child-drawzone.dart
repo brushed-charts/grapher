@@ -29,7 +29,8 @@ class ChildDrawZone {
 
   static DrawZone childDrawZone(double childWidth, DrawEvent event) {
     final drawZone = event.drawZone;
-    final startXPos = drawZone.position.dx;
+    final unitLength = drawZone.size.width;
+    final startXPos = drawZone.position.dx + (unitLength - childWidth) / 2;
     final unitYPos = drawZone.position.dy;
     final childZone = DrawZone(
       Offset(startXPos, unitYPos),
