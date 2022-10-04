@@ -9,7 +9,8 @@ import '/kernel/kernel.dart';
 class GraphFullInteraction extends StatefulWidget {
   final Widget? child;
   final GraphKernel kernel;
-  GraphFullInteraction({required this.kernel, this.child});
+  GraphFullInteraction({required this.kernel, Key? key, this.child})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

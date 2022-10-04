@@ -8,7 +8,7 @@ import '/kernel/kernel.dart';
 class GraphPointer extends StatelessWidget {
   final Widget? child;
   final GraphKernel kernel;
-  GraphPointer({required this.kernel, this.child});
+  GraphPointer({required this.kernel, Key? key, this.child}) : super(key: key);
 
   Widget build(BuildContext context) {
     return Listener(
