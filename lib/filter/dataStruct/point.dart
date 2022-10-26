@@ -6,4 +6,9 @@ class Point2D extends Timeseries2D {
       : yMin = y,
         yMax = y,
         super(x, y);
+
+  @override
+  String toString() {
+    return 'Point2D(x: $x, y: ${(y as double).toStringAsFixed(8)})';
+  }
 }
