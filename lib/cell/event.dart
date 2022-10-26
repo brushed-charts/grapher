@@ -20,7 +20,7 @@ class CellEvent {
   CellEvent(this.cell, this.rawPointerEvent, this.objectHit)
       : viewEvent = cell.baseDrawEvent! as ViewEvent,
         drawZone = cell.baseDrawEvent!.drawZone,
-        data = cell.metadata.data as Timeseries2D,
+        data = cell.metadata.data as Timeseries2D?,
         child = cell.child,
         datetime = cell.metadata.data?.x,
         pointer = PointerSummary(rawPointerEvent) {
