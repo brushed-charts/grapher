@@ -1,4 +1,5 @@
 import 'package:grapher/drawUnit/drawunit.dart';
+import 'package:grapher/kernel/copyable.dart';
 import 'package:grapher/kernel/linkEvent.dart';
 import 'package:grapher/kernel/misc/Init.dart';
 import 'package:grapher/kernel/object.dart';
@@ -8,7 +9,9 @@ import 'package:grapher/view/viewable.dart';
 
 import 'metadata.dart';
 
-class DrawUnitFactory extends Viewable with MultiPropagator {
+class DrawUnitFactory extends Viewable
+    with MultiPropagator
+    implements Copyable<DrawUnitFactory> {
   List<GraphObject> children = [];
   final DrawUnit template;
   late ViewEvent viewEvent;
@@ -33,5 +36,10 @@ class DrawUnitFactory extends Viewable with MultiPropagator {
       children.add(drawUnit);
     });
     propagate(KernelLinkEvent(kernel!));
+  }
+
+  @override
+  DrawUnitFactory copy() {
+    return DrawUnitFactory(template: this.template);
   }
 }
