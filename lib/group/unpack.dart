@@ -16,17 +16,23 @@ class UnpackToStackByGroupID extends FactorizeByGroupID with SinglePropagator {
   @override
   void draw(ViewEvent event) {
     super.draw(event);
-    if (!isGroupFactorValid()) return;
-    createChildren();
-    propagateToExtractorByGroupID();
+    handleEmptyGroup();
+    handleGroups();
   }
 
-  bool isGroupFactorValid() {
-    if (stackLayerNeeded() == 0) return false;
-    return true;
+  void handleEmptyGroup() {
+    if (stackLayerNeeded() > 0) return;
+    useTemplateAsDefaultChild();
+    propagateViewEventWithNullChainData();
   }
 
-  void createChildren() {
+  void handleGroups() {
+    if (stackLayerNeeded() == 0) return;
+    useTemplateToCreateChild();
+    propagateGroupFactor();
+  }
+
+  void useTemplateToCreateChild() {
     final childrenCount = stackLayerNeeded();
     final children = <GraphObject>[];
     for (var i = 0; i < childrenCount; i++) {
@@ -38,10 +44,22 @@ class UnpackToStackByGroupID extends FactorizeByGroupID with SinglePropagator {
     child = StackLayout(children: children);
   }
 
-  void propagateToExtractorByGroupID() {
+  void propagateViewEventWithNullChainData() {
+    final editedEvent = (baseDrawEvent as ViewEvent).copy();
+    final dataLength = editedEvent.chainData.length;
+    editedEvent.chainData = List.filled(dataLength, null);
+    propagate(KernelLinkEvent(kernel!));
+    propagate(editedEvent);
+  }
+
+  void propagateGroupFactor() {
     propagate(KernelLinkEvent(kernel!));
     propagate(groupFactorized);
     propagate(baseDrawEvent);
+  }
+
+  void useTemplateAsDefaultChild() {
+    child = template;
   }
 
   int stackLayerNeeded() {

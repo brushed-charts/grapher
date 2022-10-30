@@ -14,8 +14,17 @@ abstract class FactorizeByGroupID extends Viewable {
   @override
   void draw(ViewEvent event) {
     super.draw(event);
+    initGroupFactor();
+  }
+
+  void initGroupFactor() {
     groupFactorized = GroupFactor();
+    final event = (baseDrawEvent as ViewEvent);
     final setOfGroupID = getGroupIDList(event);
+    foreachIDExtractChainToGroupFactor(setOfGroupID);
+  }
+
+  void foreachIDExtractChainToGroupFactor(Set<int> setOfGroupID) {
     for (final id in setOfGroupID) {
       final chainGroup = extractGroupByIDKeepingIndex(id);
       groupFactorized.add(id, chainGroup.toList());
