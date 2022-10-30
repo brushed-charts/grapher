@@ -2,12 +2,13 @@ import 'axis.dart';
 
 class UnitAxis extends Axis {
   late double unitLength;
-  late var dateUnits = <DateTime>[];
+  var dateUnits = <DateTime>[];
 
   UnitAxis();
 
   UnitAxis.copy(UnitAxis ref)
       : unitLength = ref.unitLength,
+        dateUnits = ref.dateUnits,
         super.copy(ref);
 
   UnitAxis copy() => UnitAxis.copy(this);
@@ -20,7 +21,7 @@ class UnitAxis extends Axis {
 
   DateTime? toDate(double pixel) {
     final index = (pixel / unitLength).floor();
-    if (index < 0 || index > dateUnits.length) return null;
+    if (index < 0 || index >= dateUnits.length) return null;
     final date = dateUnits[index];
     return date;
   }

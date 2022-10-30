@@ -4,6 +4,7 @@ import 'package:grapher/drawUnit/draw-unit-object.dart';
 import 'package:grapher/drawUnit/drawunit.dart';
 import 'package:grapher/pointer/helper/hit.dart';
 import 'package:grapher/pointer/helper/hover.dart';
+import 'package:grapher/view/view-event.dart';
 import '../drawUnit/metadata.dart';
 
 class Cell extends DrawUnit with HitHelper, HoverHelper {
@@ -22,7 +23,8 @@ class Cell extends DrawUnit with HitHelper, HoverHelper {
   @override
   void onHover(PointerHoverEvent event) {
     if (!isTappingOnSelf(event.localPosition)) return;
-    final cellEvent = CellEvent(this, event, null);
+    final dateTouched = positionToDatetime(event.localPosition);
+    final cellEvent = CellEvent(this, event, null, dateTouched);
     propagate(cellEvent);
   }
 
@@ -30,7 +32,8 @@ class Cell extends DrawUnit with HitHelper, HoverHelper {
   void onTapDown(covariant TapDownDetails event) {
     if (!isTappingOnSelf(event.localPosition)) return;
     final hitObject = getHitChild(event.localPosition);
-    final cellEvent = CellEvent(this, event, hitObject);
+    final dateTouched = positionToDatetime(event.localPosition);
+    final cellEvent = CellEvent(this, event, hitObject, dateTouched);
     propagate(cellEvent);
   }
 
@@ -43,5 +46,11 @@ class Cell extends DrawUnit with HitHelper, HoverHelper {
   DrawUnitObject? getHitChild(Offset position) {
     if (child.isHit(position)) return child;
     return null;
+  }
+
+  DateTime positionToDatetime(Offset pos) {
+    final viewEvent = (baseDrawEvent as ViewEvent);
+    final date = viewEvent.xAxis.toDate(pos.dx);
+    return date!;
   }
 }

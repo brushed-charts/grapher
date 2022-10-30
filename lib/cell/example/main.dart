@@ -21,7 +21,6 @@ import 'package:grapher/utils/merge.dart';
 import 'package:grapher/view/window.dart';
 
 import 'package:flutter/material.dart';
-import '/kernel/kernel.dart';
 import '/pointer/widget.dart';
 
 main(List<String> args) async {
