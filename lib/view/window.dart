@@ -26,6 +26,7 @@ class Window extends Boundary with SinglePropagator {
   void drawOnValidInput(DrawEvent drawEvent) {
     final cuttedChain = inputData!.skip(lower).take(length);
     yAxis.virtualRange = YVirtualRangeUpdate.process(cuttedChain);
+    xAxis.dateUnits = cuttedChain.map((e) => e.x as DateTime).toList();
     propagate(ViewEvent(drawEvent, xAxis, yAxis, cuttedChain));
   }
 
