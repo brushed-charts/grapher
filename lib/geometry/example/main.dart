@@ -27,7 +27,6 @@ import 'package:grapher/utils/y-virtual-range.dart';
 import 'package:grapher/view/window.dart';
 
 import 'package:flutter/material.dart';
-import '/kernel/kernel.dart';
 import '/pointer/widget.dart';
 import 'json-oanda-ma.dart';
 
