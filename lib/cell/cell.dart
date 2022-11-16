@@ -50,7 +50,7 @@ class Cell extends DrawUnit with HitHelper, HoverHelper {
 
   DateTime positionToDatetime(Offset pos) {
     final viewEvent = (baseDrawEvent as ViewEvent);
-    final date = viewEvent.xAxis.toDate(pos.dx);
+    final date = viewEvent.xAxis.toVirtual(pos.dx);
     return date!;
   }
 }

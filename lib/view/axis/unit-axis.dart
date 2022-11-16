@@ -19,7 +19,7 @@ class UnitAxis extends Axis {
     return index * unitLength - unitLength / 2;
   }
 
-  DateTime? toDate(double pixel) {
+  DateTime? toVirtual(double pixel) {
     final index = (pixel / unitLength).floor();
     if (index < 0 || index >= dateUnits.length) return null;
     final date = dateUnits[index];
