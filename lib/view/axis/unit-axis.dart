@@ -16,13 +16,19 @@ class UnitAxis extends Axis {
   double? toPixel(DateTime dateToConvert) {
     final index = dateUnits.indexOf(dateToConvert);
     if (index == -1) return null;
-    return index * unitLength - unitLength / 2;
+    final count = dateUnits.length;
+    final reversedIndex = count - 1 - index;
+    final upperBound = pixelRange.max;
+    final x = upperBound - (reversedIndex * unitLength + unitLength / 2);
+    return x;
   }
 
   DateTime? toVirtual(double pixel) {
-    final index = (pixel / unitLength).floor();
+    final upperBound = pixelRange.max;
+    final reversedPixel = upperBound - pixel;
+    final index = (reversedPixel / unitLength).floor();
     if (index < 0 || index >= dateUnits.length) return null;
-    final date = dateUnits[index];
+    final date = dateUnits.reversed.toList()[index];
     return date;
   }
 
