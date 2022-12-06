@@ -6,6 +6,7 @@ import 'package:grapher/kernel/kernel.dart';
 import 'package:grapher/reference/example/reference_tester.dart';
 import 'package:grapher/reference/main.dart';
 import 'package:grapher/reference/memory_repository.dart';
+import 'package:grapher/reference/reader.dart';
 
 void main() {
   final repository = ReferenceRepositoryInMemory();
@@ -13,9 +14,11 @@ void main() {
       child: Reference(
     name: "reference_tester",
     repository: repository,
-    child: ReferenceTester(),
+    child: ReferenceTester(
+        referenceToSelf: ReferenceReader(
+            refName: "reference_tester", repository: repository)),
   ));
 
-  final tester = repository.access<ReferenceTester>("reference_tester");
-  tester?.test();
+  // final tester = repository.access<ReferenceTester>("reference_tester");
+  // tester?.test();
 }

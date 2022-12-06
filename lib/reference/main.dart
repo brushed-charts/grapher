@@ -3,15 +3,14 @@ import 'package:grapher/kernel/propagator/single.dart';
 import 'package:grapher/reference/contract.dart';
 
 class Reference extends GraphObject with SinglePropagator {
-  final ReferenceRepositoryInterface _repository;
+  final ReferenceRepositoryInterface repository;
   final String name;
 
   Reference(
       {required this.name,
-      required ReferenceRepositoryInterface repository,
-      required GraphObject child})
-      : _repository = repository {
+      required this.repository,
+      required GraphObject child}) {
     this.child = child;
-    _repository.link(name, child);
+    repository.link(name, child);
   }
 }
