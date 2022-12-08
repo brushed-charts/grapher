@@ -13,12 +13,16 @@ mixin DragHelper on Drawable {
 
   void onDrag(DragUpdateDetails event);
 
-  void onDragEnd(dynamic event) => isHold = false;
+  void onDragEnd(dynamic event) {
+    isHold = false;
+    propagate(event);
+  }
 
   void onTapDownDrag(dynamic event) {
     final pointerPosition = event.localPosition;
     final _isHit = isHit(pointerPosition);
     if (_isHit) isHold = true;
+    propagate(event);
   }
 
   bool isHit(Offset pointer) {
@@ -32,8 +36,8 @@ mixin DragHelper on Drawable {
   }
 
   void onRawDrag(dynamic event) {
+    propagate(event);
     if (!isHold) return;
     onDrag(event);
-    propagate(event);
   }
 }
