@@ -21,6 +21,12 @@ class GraphFullInteraction extends StatefulWidget {
 class _GraphFullInteraction extends State<GraphFullInteraction> {
   final focusNode = FocusNode();
 
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return KeyboardListener(
         focusNode: focusNode,
@@ -38,7 +44,6 @@ class _GraphFullInteraction extends State<GraphFullInteraction> {
   }
 
   void onKeyStroke(KeyEvent event) {
-    if (event.character == null) return;
     if (event is! KeyDownEvent) return;
     widget.kernel.propagate(event);
   }
