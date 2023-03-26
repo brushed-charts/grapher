@@ -14,9 +14,13 @@ class ReferenceRepositoryInMemory implements ReferenceRepositoryInterface {
   @override
   void link(String name, GraphObject reference) {
     if (_repository.containsKey(name)) {
-      throw StateError("Reference repository already contains"
+      throw StateError("Reference repository already contains "
           "object named: $name");
     }
     _repository[name] = reference;
+  }
+
+  void reset() {
+    _repository.clear();
   }
 }
