@@ -16,9 +16,9 @@ class VerticalAxis extends AxisObject with SinglePropagator {
     super.draw(event);
     if (viewEvent == null) return;
     final range = viewEvent!.yAxis.virtualRange;
-    final text_count = viewEvent!.yAxis.pixelRange.length / TEXT_HEIGHT;
-    final vincrement_rate = range.length / text_count;
-    drawAxis(vincrement_rate);
+    final textCount = viewEvent!.yAxis.pixelRange.length / TEXT_HEIGHT;
+    final vincrementRate = range.length / textCount;
+    drawAxis(vincrementRate);
   }
 
   void drawAxis(double vincrement_rate) {

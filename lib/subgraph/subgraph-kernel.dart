@@ -46,7 +46,7 @@ class SubGraphKernel extends AbstractKernel {
   }
 
   @override
-  bool? hitTest(Offset position) {}
+  bool? hitTest(Offset position) => false;
 
   @override
   void paint(Canvas canvas, Size size) => null;

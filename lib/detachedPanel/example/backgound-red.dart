@@ -4,7 +4,7 @@ import '/kernel/drawEvent.dart';
 import '/kernel/propagator/single.dart';
 
 class FillBackgroundRed extends Drawable with SinglePropagator {
-  static final COLOR = Colors.red;
+  static const COLOR = Colors.red;
 
   void draw(covariant DrawEvent drawEvent) {
     super.draw(drawEvent);
